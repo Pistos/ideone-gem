@@ -8,9 +8,9 @@ module Ideone
   class IdeoneError < StandardError; end
 
   LANGUAGES = {
-    :ruby => 17,
+    :ruby   => 17,
     :python => 4,
-    :c => 11
+    :c      => 11
   }
 
   def self.submit( lang, code )
@@ -22,7 +22,7 @@ module Ideone
       URI.parse("http://ideone.com/ideone/Index/submit/"),
       {
         'lang' => LANGUAGES[lang],
-        'run' => 0,
+        'run'  => 0,
         'file' => code
       }
     ).header['location'][1..-1]
@@ -32,7 +32,7 @@ module Ideone
     res = JSON.load(
       Net::HTTP.post_form(
         URI.parse( "http://ideone.com/submit/parent/#{id}" ),
-        {'input' => input}
+        { 'input' => input }
       ).body
     )
     if res['status'] != 'ok'
