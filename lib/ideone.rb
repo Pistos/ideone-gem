@@ -50,7 +50,26 @@ module Ideone
         ).body
       )
       i += 1
-    end while res['result'] != "15" && i < timeout
+    end while res['status'] != '0' && i < timeout
+
+    case res[ 'result' ]
+      when '0', '15'
+        # success
+      when '11'
+        raise IdeoneError, "Compilation error"
+      when '12'
+        raise IdeoneError, "Runtime error"
+      when '13'
+        raise IdeoneError, "Execution timed out"
+      when '17'
+        raise IdeoneError, "Memory limit exceeded"
+      when '19'
+        raise IdeoneError, "Illegal system call"
+      when '20'
+        raise IdeoneError, "Internal error occurred at ideone.com"
+      else
+        raise IdeoneError, "Unknown result: " + res[ 'result' ]
+    end
 
     if i == timeout
       raise IdeoneError, "Timed out while waiting for code result."
