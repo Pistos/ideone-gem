@@ -45,7 +45,12 @@ module Ideone
 
     begin
       sleep 1  if i > 0
-      res = JSON.load(Net::HTTP.post_form(URI.parse("http://ideone.com/ideone/Index/view/id/#{loc}/ajax/1"),{}).body)
+      res = JSON.load(
+        Net::HTTP.post_form(
+          URI.parse("http://ideone.com/ideone/Index/view/id/#{loc}/ajax/1"),
+          {}
+        ).body
+      )
       i += 1
     end while res['result'] != "15" && i < TIMEOUT
 
