@@ -12,7 +12,7 @@ module Ideone
     :python => 4,
     :c      => 11
   }
-  TIMEOUT = 7   # seconds
+  TIMEOUT = 4   # seconds
 
   def self.submit( lang, code )
     if ! LANGUAGES.keys.include?( lang )
