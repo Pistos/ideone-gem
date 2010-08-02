@@ -14,10 +14,8 @@ module Ideone
   }
   TIMEOUT = 4   # seconds
 
-  def self.submit( lang, code )
-    if ! LANGUAGES.keys.include?( lang )
-      raise "Invalid language: #{lang}"
-    end
+  def self.submit( lang_, code )
+    lang = LANGUAGES[ lang_ ] || lang_
 
     Net::HTTP.post_form(
       URI.parse("http://ideone.com/ideone/Index/submit/"),
