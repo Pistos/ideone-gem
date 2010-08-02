@@ -12,6 +12,7 @@ module Ideone
     :python => 4,
     :c      => 11
   }
+  TIMEOUT = 7   # seconds
 
   def self.submit( lang, code )
     if ! LANGUAGES.keys.include?( lang )
@@ -46,9 +47,9 @@ module Ideone
       sleep 1  if i > 0
       res = JSON.load(Net::HTTP.post_form(URI.parse("http://ideone.com/ideone/Index/view/id/#{loc}/ajax/1"),{}).body)
       i += 1
-    end while res['result'] != "15" && i < 4
+    end while res['result'] != "15" && i < TIMEOUT
 
-    if i == 4
+    if i == TIMEOUT
       raise IdeoneError, "Timed out while waiting for code result."
     end
 
