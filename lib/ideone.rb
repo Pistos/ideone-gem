@@ -29,7 +29,7 @@ module Ideone
     ).header['location'][1..-1]
   end
 
-  def self.run( id, input )
+  def self.run( id, input, timeout = TIMEOUT )
     res = JSON.load(
       Net::HTTP.post_form(
         URI.parse( "http://ideone.com/submit/parent/#{id}" ),
@@ -52,9 +52,9 @@ module Ideone
         ).body
       )
       i += 1
-    end while res['result'] != "15" && i < TIMEOUT
+    end while res['result'] != "15" && i < timeout
 
-    if i == TIMEOUT
+    if i == timeout
       raise IdeoneError, "Timed out while waiting for code result."
     end
 
