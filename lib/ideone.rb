@@ -57,8 +57,11 @@ module Ideone
       err[1]
     else
       out = res['inouterr'].match(/<label>output:<\/label>.*?<pre.*?>(.*?)<\/pre>/m)
-      raise IdeoneError, "Error parsing output." unless out
-      out[1]
+      if out
+        out[1]
+      else
+        raise IdeoneError, "Error parsing output."
+      end
     end
   end
 
