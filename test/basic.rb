@@ -8,6 +8,12 @@ describe 'an ideone gem user' do
     results.should.equal %{text on stdout\n}
   end
 
+  it 'can submit Perl code and receive stdout' do
+    paste_id = Ideone.submit( :perl, %{print "text on stdout\\n"} )
+    results = Ideone.run( paste_id, nil )
+    results.should.equal %{text on stdout\n}
+  end
+
   it 'can submit Python code and receive stdout' do
     paste_id = Ideone.submit( :python, %{print "text on stdout"} )
     results = Ideone.run( paste_id, nil )
