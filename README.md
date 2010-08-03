@@ -6,6 +6,10 @@ http://github.com/Pistos/ideone-gem
 
 Base code taken from http://github.com/staii/tgoa .  See References, below.
 
+## Requirements
+
+Ruby 1.8.6 or later
+
 ## Installation
 
 gem install ideone
