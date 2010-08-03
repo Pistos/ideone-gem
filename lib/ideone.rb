@@ -29,7 +29,7 @@ module Ideone
     :python     => 4,
     :ruby       => 17,
   }
-  TIMEOUT = 4   # seconds
+  TIMEOUT = 4   # iterations
 
   def self.submit( lang_, code )
     lang = LANGUAGES[ lang_ ] || lang_
