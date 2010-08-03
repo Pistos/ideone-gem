@@ -6,9 +6,13 @@ http://github.com/Pistos/ideone-gem
 
 Base code taken from http://github.com/staii/tgoa .  See References, below.
 
+## Installation
+
+gem install ideone
+
 ## Examples
 
-See examples/ dir of repository or gem.
+See examples/ and test/ dirs of repository or gem.
 
 ## Contact
 
