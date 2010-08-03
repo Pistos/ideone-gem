@@ -2,7 +2,6 @@ require 'json'
 require 'net/http'
 require 'cgi'
 
-
 module Ideone
 
   class IdeoneError < StandardError; end
@@ -98,7 +97,7 @@ module Ideone
     else
       out = res['inouterr'].match(/<label>output:<\/label>.*?<pre.*?>(.*?)<\/pre>/m)
       if out
-        out[1]
+        CGI.unescape_html out[1]
       end
     end
   end

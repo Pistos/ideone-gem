@@ -35,6 +35,12 @@ describe 'an ideone gem user' do
   it "can submit Ruby code that doesn't print anything to stdout" do
     paste_id = Ideone.submit( :ruby, %{1+1} )
     results = Ideone.run( paste_id, nil )
-    results.should.equal nil
+    results.should.be.nil
+  end
+
+  it 'can submit Ruby code and receive stdout that has characters that would get HTML escaped' do
+    paste_id = Ideone.submit( :ruby, %{p '1 < 2'} )
+    results = Ideone.run( paste_id, nil )
+    results.should.equal %{"1 < 2"\n}
   end
 end
