@@ -25,4 +25,10 @@ describe 'an ideone gem user' do
     results = Ideone.run( paste_id, nil )
     results.should.equal %{text on stdout\n}
   end
+
+  it 'can submit Bash code and receive stdout' do
+    paste_id = Ideone.submit( :bash, %{echo "text on stdout"} )
+    results = Ideone.run( paste_id, nil )
+    results.should.equal %{text on stdout\n}
+  end
 end
