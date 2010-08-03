@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name = 'ideone'
-  s.version = '0.8.1'
+  s.version = '0.8.2'
   s.summary = 'A Ruby interface to the ideone.com API'
 
   s.author = 'Pistos'
