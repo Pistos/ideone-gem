@@ -99,8 +99,6 @@ module Ideone
       out = res['inouterr'].match(/<label>output:<\/label>.*?<pre.*?>(.*?)<\/pre>/m)
       if out
         out[1]
-      else
-        raise IdeoneError, "Error parsing output."
       end
     end
   end

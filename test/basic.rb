@@ -31,4 +31,10 @@ describe 'an ideone gem user' do
     results = Ideone.run( paste_id, nil )
     results.should.equal %{text on stdout\n}
   end
+
+  it "can submit Ruby code that doesn't print anything to stdout" do
+    paste_id = Ideone.submit( :ruby, %{1+1} )
+    results = Ideone.run( paste_id, nil )
+    results.should.equal nil
+  end
 end
