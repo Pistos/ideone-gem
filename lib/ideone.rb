@@ -8,9 +8,26 @@ module Ideone
   class IdeoneError < StandardError; end
 
   LANGUAGES = {
-    :ruby   => 17,
-    :python => 4,
-    :c      => 11
+    :bash       => 28,
+    :c          => 11,
+    'c#'        => 27,
+    :csharp     => 27,
+    'c++'       => 1,
+    :cpp        => 1,
+    :cplusplus  => 1,
+    :clojure    => 111,
+    :commonlisp => 32,
+    :clisp      => 32,
+    :erlang     => 36,
+    :go         => 114,
+    :haskell    => 21,
+    :java       => 10,
+    :javascript => 112,
+    :js         => 112,
+    :perl       => 3,
+    :php        => 29,
+    :python     => 4,
+    :ruby       => 17,
   }
   TIMEOUT = 4   # seconds
 
