@@ -20,7 +20,7 @@ module Ideone
     Net::HTTP.post_form(
       URI.parse("http://ideone.com/ideone/Index/submit/"),
       {
-        'lang' => LANGUAGES[lang],
+        'lang' => lang,
         'run'  => 0,
         'file' => code
       }
