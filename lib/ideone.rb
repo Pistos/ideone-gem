@@ -27,6 +27,13 @@ module Ideone
     :php        => 29,
     :python     => 4,
     :ruby       => 17,
+    :lua        => 26,
+    :tcl        => 38,
+    :bf         => 12,
+    :bc         => 110,
+    :gawk       => 104,
+    #:mawk       => 105,
+    :nasm       => 13,
   }
   TIMEOUT = 4   # iterations
 
