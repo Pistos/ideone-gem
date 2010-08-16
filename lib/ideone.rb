@@ -45,7 +45,8 @@ module Ideone
       {
         'lang' => lang,
         'run'  => 0,
-        'file' => code
+        'file' => code,
+        'public' => 0
       }
     ).header['location'][1..-1]
   end
