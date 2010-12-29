@@ -32,7 +32,6 @@ module Ideone
     :bf         => 12,
     :bc         => 110,
     :gawk       => 104,
-    #:mawk       => 105,
     :nasm       => 13,
   }
   TIMEOUT = 4   # iterations
