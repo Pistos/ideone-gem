@@ -98,11 +98,11 @@ module Ideone
       raise IdeoneError, "Timed out while waiting for code result."
     end
 
-    err = res['inouterr'].match(/<label>stderr:<\/label>.*?<pre.*?>(.*?)<\/pre>/m)
+    err = res['inouterr'].match(/<label>stderr:<\/label>.*?<pre.*?>\n(.*?)\n<\/pre>/m)
     if err
       err[1]
     else
-      out = res['inouterr'].match(/<label>output:<\/label>.*?<pre.*?>(.*?)<\/pre>/m)
+      out = res['inouterr'].match(/<label>output:<\/label>.*?<pre.*?>\n(.*?)\n<\/pre>/m)
       if out
         CGI.unescapeHTML out[1]
       end
