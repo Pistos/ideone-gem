@@ -102,10 +102,8 @@ module Ideone
     if err
       err[1]
     else
-      out = res['inouterr'].match(/<label>output:<\/label>.*?<pre.*?>\n(.*?)\n<\/pre>/m)
-      if out
-        CGI.unescapeHTML out[1]
-      end
+      out = res['inouterr'].match(/output:<\/label>...<pre class="box">(.*)<\/pre>/m)
+      CGI.unescapeHTML(out[1]) if out
     end
   end
 
