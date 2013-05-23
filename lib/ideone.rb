@@ -49,11 +49,6 @@ module Ideone
       }
     ).header['location'][1..-1]
   end
-  
-  def self.error_message(res)
-    err = res['inouterr'].match(/<label>stderr:<\/label>...<pre class="box">(.*)<\/pre>/m)
-    err[1]  if err
-  end
 
   def self.run( id, input, timeout = TIMEOUT )
     res = JSON.load(
@@ -90,12 +85,11 @@ module Ideone
         if out
           CGI.unescapeHTML(out[1]) 
         end
-      when '11'
-        message = error_message(res)
-        raise IdeoneError, "Compilation error: #{message}"        
-      when '12'
-        message = error_message(res)
-        raise IdeoneError, "Runtime error: #{message}"
+      when '11', '12'
+        err = res['inouterr'].match(/<label>stderr:<\/label>...<pre class="box">(.*)<\/pre>/m)
+        message = err[1]  if err
+        type = res['result'] == '11' ? "Compile" : "Runtime"
+        raise IdeoneError, "#{type} error: #{message}"       
       when '13'
         raise IdeoneError, "Execution timed out"
       when '17'
