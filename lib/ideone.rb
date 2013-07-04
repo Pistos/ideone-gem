@@ -85,11 +85,14 @@ module Ideone
         if out
           CGI.unescapeHTML(out[1]) 
         end
-      when '11', '12'
+      when '11'
+        err = res['cmperr'].match(/view_cmperr_content\">(.*)<\/pre>/m)   
+        message = err[1]  if err
+        raise IdeoneError, "Compile error: #{message}"   
+      when '12'
         err = res['inouterr'].match(/<label>stderr:<\/label>...<pre class="box">(.*)<\/pre>/m)
         message = err[1]  if err
-        type = res['result'] == '11' ? "Compile" : "Runtime"
-        raise IdeoneError, "#{type} error: #{message}"       
+        raise IdeoneError, "Runtime error: #{message}"       
       when '13'
         raise IdeoneError, "Execution timed out"
       when '17'
