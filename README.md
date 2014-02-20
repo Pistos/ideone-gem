@@ -2,7 +2,7 @@
 
 A Ruby interface to the ideone.com API.
 
-**This gem is no longer being maintained. Please use [ideone-ruby-api](https://rubygems.org/gems/ideone-ruby-api).**
+**This gem is no longer being maintained. Consider using [ideone-ruby-api](https://rubygems.org/gems/ideone-ruby-api).**
 
 http://github.com/Pistos/ideone-gem
 
