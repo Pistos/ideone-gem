@@ -75,13 +75,24 @@ module Ideone
       i += 1
     end while res['status'] != '0' && i < timeout
 
+    if i == timeout
+      raise IdeoneError, "Timed out while waiting for code result."
+    end
+
     case res[ 'result' ]
       when '0', '15'
-        # success
+        out = res['inouterr'].match(/output:<\/label>...<pre class="box">(.*)<\/pre>/m)
+        if out
+          CGI.unescapeHTML(out[1]) 
+        end
       when '11'
-        raise IdeoneError, "Compilation error"
+        err = res['cmperr'].match(/view_cmperr_content\">(.*)<\/pre>/m)   
+        message = err[1]  if err
+        raise IdeoneError, "Compile error: #{message}"   
       when '12'
-        raise IdeoneError, "Runtime error"
+        err = res['inouterr'].match(/<label>stderr:<\/label>...<pre class="box">(.*)<\/pre>/m)
+        message = err[1]  if err
+        raise IdeoneError, "Runtime error: #{message}"       
       when '13'
         raise IdeoneError, "Execution timed out"
       when '17'
@@ -94,19 +105,6 @@ module Ideone
         raise IdeoneError, "Unknown result: " + res[ 'result' ]
     end
 
-    if i == timeout
-      raise IdeoneError, "Timed out while waiting for code result."
-    end
-
-    err = res['inouterr'].match(/<label>stderr:<\/label>.*?<pre.*?>\n(.*?)\n<\/pre>/m)
-    if err
-      err[1]
-    else
-      out = res['inouterr'].match(/<label>output:<\/label>.*?<pre.*?>\n(.*?)\n<\/pre>/m)
-      if out
-        CGI.unescapeHTML out[1]
-      end
-    end
   end
 
 end
